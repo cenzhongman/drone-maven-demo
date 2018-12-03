@@ -1,18 +1,9 @@
 kind: pipeline
-name: maven-test
+name: default
 
 steps:
-- name: build
-  image: maven:3-alpine
-  commands:
-  - mvn clean package
-
 - name: test
-  image: maven:3-alpine
+  image: maven:3-jdk-10
   commands:
-  - mvn test
-
-- name: deploy
-  image: maven:3-alpine
-  commands:
-  - mvn clean install
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - mvn test -B
