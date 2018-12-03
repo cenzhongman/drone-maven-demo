@@ -1,0 +1,18 @@
+kind: pipeline
+name: maven-test
+
+steps:
+- name: build
+  image: maven:3-alpine
+  commands:
+  - mvn clean package
+
+- name: test
+  image: maven:3-alpine
+  commands:
+  - mvn test
+
+- name: deploy
+  image: maven:3-alpine
+  commands:
+  - mvn clean install
